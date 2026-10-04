@@ -38,7 +38,7 @@
           </div>
         </div>
         <div class="col-md-6 text-right align-self-center">
-          <button class="btn btn-sm netflix-pri-Color">Add Movie</button>
+          <button class="btn btn-sm netflix-pri-Color" id="addBtn">Add Movie</button>
         </div>
       </div>
     </div>
@@ -50,11 +50,11 @@
     <div class="container-fluid">
       <div class="row">
         <div class="col-md-6">
-          <form>
-            <div class="card movieModel">
+          <form id="movieForm">
+            <div class="card movieModel" id="movieModel">
               <div class="card-header d-flex justify-content-between">
                 <h3 class="m-0">ADD MOVIE</h3>
-                <i class="fa-solid fa-xmark fa-2x"></i>
+                <i class="fa-solid fa-xmark fa-2x" id="closeIcon"></i>
               </div>
               <div class="card-body">
                 <div class="form-group">
@@ -76,7 +76,7 @@
                 <div class="form-group">
                   <label for="movieRating">Movie Rating</label>
                   <select class="form-control" id="movieRating">
-                    <option value="Selecte Rating">Rating</option>
+                    <option value="" selected disabled>Rating</option>
                     <option value="1">1</option>
                     <option value="2">2</option>
                     <option value="3">3</option>
@@ -88,10 +88,6 @@
                     <option value="9">9</option>
                     <option value="10">10</option>
                   </select>
-                </div>
-                <div class="form-group">
-                  <label for="createdAt">CreatedAt</label>
-                  <input type="date" class="form-control" id="createdAt" />
                 </div>
                 <div class="form-group">
                   <label for="genre">Genre</label>
@@ -108,7 +104,7 @@
                 >
                   Update Movie
                 </button>
-                <button type="button" class="btn btn-sm netflix-pri-Color">
+                <button type="button" class="btn btn-sm netflix-pri-Color" id="closeBtn">
                   Close
                 </button>
               </div>

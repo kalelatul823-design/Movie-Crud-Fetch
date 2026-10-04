@@ -1,7 +1,18 @@
 let cl = console.log;
 
 const spinner = document.getElementById("spinner");
-const movieInfo = document.getElementById("movieInfo")
+const movieInfo = document.getElementById("movieInfo");
+const movieForm = document.getElementById("movieForm");
+const movieNameControl = document.getElementById("movieName");
+const movieImgControl = document.getElementById('movieImg');
+const movieDescriptionControl = document.getElementById('movieDescription');
+const movieRatingControl = document.getElementById('movieRating');
+const genreControl = document.getElementById('genre');
+const backDrop = document.getElementById('backDrop');
+const movieModel = document.getElementById('movieModel');
+const addBtn = document.getElementById('addBtn');
+const closeIcon = document.getElementById('closeIcon');
+const closeBtn = document.getElementById("closeBtn")
 
 let BASE_URL =
   "https://fetch-api-crud-c0cc4-default-rtdb.asia-southeast1.firebasedatabase.app";
@@ -38,6 +49,14 @@ function setRating(rating){
     }else{
         return "badge-danger";
     }
+}
+
+
+//backDrop and MovieModel
+function backDropMovieModel(){
+    backDrop.classList.toggle("active");
+    movieModel.classList.toggle("active");
+    movieForm.reset();
 }
 
 
@@ -89,7 +108,7 @@ function showUi() {
 function templetingUi(arr) {
   let result = "";
   arr.forEach((ele) => {
-    result += `<div class="col-md-3" id="${ele.id}">
+    result += `<div class="col-md-3 mb-5" id="${ele.id}">
           <div class="card movieCard">
             <div class="card-header d-flex justify-content-between">
               <h3 class="m-0">${ele.movieName}</h3>
@@ -120,3 +139,74 @@ function templetingUi(arr) {
 }
 
 showUi();
+
+
+
+//create
+function onAddMovie(eve){
+   eve.preventDefault();
+
+   let newObj = {
+    movieName : movieNameControl.value,
+    movieImg : movieImgControl.value,
+    movieDescription : movieDescriptionControl.value,
+    movieRating : movieRatingControl.value,
+    genre : genreControl.value,
+    createdAt : new Date(),
+    updatedAt : new Date(),
+   };
+    showHideSpinner()
+   makeApiCall(MOVIE_URL, "POST", newObj)
+   .then((data)=>{
+    cl(data);
+    newObj.id = data.name;
+    locatState.movieArr.push(newObj);
+     
+    let div = document.createElement("div");
+    div.id = data.name;
+    div.className = `col-md-3 mb-5`;
+    div.innerHTML = `<div class="card movieCard">
+            <div class="card-header d-flex justify-content-between">
+              <h3 class="m-0">${newObj.movieName}</h3>
+              <h4 class="m-0"><span class="badge ${setRating(newObj.movieRating)}">${newObj.movieRating}</span></h4>
+            </div>
+            <div class="card-body">
+              <figure>
+                <img
+                  src="${newObj.movieImg}"
+                  alt="${newObj.movieName}"
+                />
+                <figcaption>
+                  <h3 class="m-0">${newObj.movieName}</h3>
+                  <p class="m-0">
+                    ${newObj.movieDescription}
+                  </p>
+                </figcaption>
+              </figure>
+            </div>
+            <div class="card-footer d-flex justify-content-between">
+              <button class="btn btn-sm netflix-pri-Color">Edit</button>
+              <button class="btn btn-sm netflix-sec-color">Delete</button>
+            </div>
+          </div>`
+          movieInfo.append(div);
+          backDropMovieModel()
+
+   })
+   .catch((err)=>{
+    snakBar("Something went wrong")
+   })
+}
+
+
+
+
+
+
+
+
+movieForm.addEventListener("submit", onAddMovie);
+addBtn.addEventListener("click", backDropMovieModel);
+closeIcon.addEventListener("click", backDropMovieModel);
+backDrop.addEventListener("click", backDropMovieModel);
+closeBtn.addEventListener("click", backDropMovieModel);
