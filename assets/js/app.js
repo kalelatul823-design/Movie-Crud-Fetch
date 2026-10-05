@@ -182,7 +182,7 @@ function onAddMovie(eve) {
       div.id = data.name;
       div.className = `col-md-3 mb-5`;
       div.innerHTML = `<div class="card movieCard">
-            <div class="card-header d-flex justify-content-between">
+            <div class="card-header">
               <div class="row">
             <div class="col-10">
             <h3 class="m-0">${newObj.movieName}</h3>
@@ -263,7 +263,7 @@ function onUpdateMovie(eve) {
       let div = document.getElementById(updateId);
       cl(div);
       div.innerHTML = `<div class="card movieCard">
-            <div class="card-header d-flex justify-content-between">
+            <div class="card-header">
               <div class="row">
             <div class="col-10">
             <h3 class="m-0">${updateObj.movieName}</h3>
