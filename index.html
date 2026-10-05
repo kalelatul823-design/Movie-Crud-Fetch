@@ -57,10 +57,27 @@
                 <i class="fa-solid fa-xmark fa-2x" id="closeIcon"></i>
               </div>
               <div class="card-body">
-                <div class="form-group">
+                <div class="row">
+                  <div class="col-md-4">
+                    <div class="form-group">
                   <label for="movieName">Movie Name</label>
                   <input type="text" class="form-control" id="movieName" />
                 </div>
+                  </div>
+                  <div class="col-md-4">
+                     <div class="form-group">
+                  <label for="genre">Genre</label>
+                  <input type="text" class="form-control" id="genre" />
+                </div>
+                  </div>
+                  <div class="col-md-4">
+                     <div class="form-group">
+                  <label for="createdAt">Created At</label>
+                  <input type="date" class="form-control" id="createdAt" />
+                </div>
+                  </div>
+                </div>
+                
                 <div class="form-group">
                   <label for="movieImg">Movie Img</label>
                   <input type="text" class="form-control" id="movieImg" />
@@ -89,11 +106,6 @@
                     <option value="10">10</option>
                   </select>
                 </div>
-                <div class="form-group">
-                  <label for="genre">Genre</label>
-                  <input type="text" class="form-control" id="genre" />
-                </div>
-                
               </div>
               <div class="card-footer d-flex justify-content-between">
                 <button type="submit" class="btn btn-sm netflix-pri-Color" id="submitBtn">
@@ -115,7 +127,7 @@
       </div>
 
       <div class="row mt-5" id="movieInfo">
-        <div class="col-md-3">
+        <!-- <div class="col-md-3">
           <div class="card movieCard">
             <div class="card-header d-flex justify-content-between">
               <h3 class="m-0">Title</h3>
@@ -141,7 +153,7 @@
               <button class="btn btn-sm netflix-sec-color">Delete</button>
             </div>
           </div>
-        </div>
+        </div> -->
       </div>
     </div>
 
