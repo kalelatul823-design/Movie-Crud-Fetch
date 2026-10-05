@@ -124,8 +124,8 @@ function templetingUi(arr) {
             <div class="row">
             <div class="col-10">
             <h3 class="m-0">${ele.movieName}</h3>
-            <small class="createdAt">Created At: ${ele.createdAt}</small>
-            <small class="updatedAt d-none">Updated At : ijfjdjkjjk</small>
+            <small class="createdAt">Created At: ${ele.createdAt}</small><br>
+            ${ele.updatedAt ? `<small class="updatedAt">Updated At : ${ele.updatedAt}</small>` : ""}
             </div>
             <div class="col-2">
              <h4 class="m-0"><span class="badge ${setRating(ele.movieRating)}">${ele.movieRating}</span></h4>
@@ -186,7 +186,7 @@ function onAddMovie(eve) {
               <div class="row">
             <div class="col-10">
             <h3 class="m-0">${newObj.movieName}</h3>
-            <small class="createdAt">Created At: ${newObj.createdAt}</small>
+            <small class="createdAt">Created At: ${newObj.createdAt}</small><br>
             <small class="updatedAt d-none">Updated At : ijfjdjkjjk</small>
             </div>
             <div class="col-2">
@@ -301,6 +301,37 @@ function onUpdateMovie(eve) {
     .catch((err) => {
       snakBar("something went wrong");
     });
+}
+
+
+//delete
+function onRemove(ele){
+    Swal.fire({
+  title: "Are you sure?",
+  text: "You won't be able to revert this!",
+  icon: "warning",
+  showCancelButton: true,
+  confirmButtonColor: "#3085d6",
+  cancelButtonColor: "#d33",
+  confirmButtonText: "Yes, delete it!"
+}).then((result) => {
+  if (result.isConfirmed) {
+   let removeId = ele.closest(".col-md-3").id;
+  let removeUrl = `${BASE_URL}/movies/${removeId}.json`;
+  showHideSpinner();
+  makeApiCall(removeUrl, "DELETE")
+  .then((data)=>{
+    cl(data)
+    let getIndex = locatState.movieArr.findIndex((ele)=> ele.id === removeId);
+    locatState.movieArr.splice(getIndex, 1);
+    ele.closest(".col-md-3").remove();
+  })
+  .catch((err)=>{
+    snakBar("Someting went wrong");
+  })
+  }
+});
+   
 }
 
 
