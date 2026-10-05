@@ -12,7 +12,10 @@ const backDrop = document.getElementById('backDrop');
 const movieModel = document.getElementById('movieModel');
 const addBtn = document.getElementById('addBtn');
 const closeIcon = document.getElementById('closeIcon');
-const closeBtn = document.getElementById("closeBtn")
+const closeBtn = document.getElementById("closeBtn");
+const submitBtn = document.getElementById("submitBtn");
+const updateBtn = document.getElementById("updateBtn")
+
 
 let BASE_URL =
   "https://fetch-api-crud-c0cc4-default-rtdb.asia-southeast1.firebasedatabase.app";
@@ -129,8 +132,8 @@ function templetingUi(arr) {
               </figure>
             </div>
             <div class="card-footer d-flex justify-content-between">
-              <button class="btn btn-sm netflix-pri-Color">Edit</button>
-              <button class="btn btn-sm netflix-sec-color">Delete</button>
+              <button onclick="onEdit(this)" class="btn btn-sm netflix-pri-Color">Edit</button>
+              <button onclick="onRemove(this)" class="btn btn-sm netflix-sec-color">Delete</button>
             </div>
           </div>
         </div>`;
@@ -185,8 +188,8 @@ function onAddMovie(eve){
               </figure>
             </div>
             <div class="card-footer d-flex justify-content-between">
-              <button class="btn btn-sm netflix-pri-Color">Edit</button>
-              <button class="btn btn-sm netflix-sec-color">Delete</button>
+              <button onclick="onEdit(this)" class="btn btn-sm netflix-pri-Color">Edit</button>
+              <button onclick="onRemove(this)" class="btn btn-sm netflix-sec-color">Delete</button>
             </div>
           </div>`
           movieInfo.append(div);
@@ -199,7 +202,21 @@ function onAddMovie(eve){
 }
 
 
-
+//edit
+function onEdit(ele){
+  let editId = ele.closest(".col-md-3").id;
+  locatState.editId = editId;
+  backDropMovieModel()
+  let editObj = locatState.movieArr.find((ele)=> ele.id === editId);
+  movieNameControl.value = editObj.movieName;
+  movieImgControl.value = editObj.movieImg;
+  movieDescriptionControl.value = editObj.movieDescription;
+  movieRatingControl.value = editObj.movieRating;
+  genreControl.value = editObj.genre;
+  
+  submitBtn.classList.add("d-none");
+  updateBtn.classList.remove("d-none")
+}
 
 
 
